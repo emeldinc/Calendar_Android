@@ -1,13 +1,17 @@
 package com.example.monster.calendar_android;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Button;
+
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,20 +28,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class MainActivity extends AppCompatActivity {
     CalendarView calendarView;
     TextView  myDate;
     RequestQueue requestQueue;
     Appointment appointment;
     List<Appointment> appointments;
+    TableLayout showAppointmentsTable;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        calendarView = (CalendarView) findViewById(R.id.calendarView);
-        myDate = (TextView) findViewById(R.id.myDate);
+        context = getApplicationContext();
+
+        calendarView = findViewById(R.id.calendarView);
+        myDate = findViewById(R.id.myDate);
+        //postData = (Button) findViewById(R.id.data);
+        showAppointmentsTable = findViewById(R.id.appointments);
 
         requestQueue = Volley.newRequestQueue(this);
         appointments = new ArrayList<Appointment>();
@@ -49,11 +60,10 @@ public class MainActivity extends AppCompatActivity {
                 myDate.setText(date);
             }
         });
-        String URL = "https://beck-calendar4.herokuapp.com/api/v1/appointments";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+        final String URL = "https://beck-calendar4.herokuapp.com/api/v1/appointments";
+        StringRequest stringGETRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("deneme", "onresponse");
                 try {
                     JSONArray json = new JSONArray(response);
                     for (int i = 0; i < json.length(); i++) {
@@ -67,11 +77,29 @@ public class MainActivity extends AppCompatActivity {
                         appointment.end_time = obj.getString("end_time");
                         appointment.created_at = obj.getString("created_at");
                         appointment.updated_at = obj.getString("updated_at");
-                        Log.d("title", appointment.title);
                         appointments.add(appointment);
                     }
                     for(int j = 0; j < appointments.size(); j++) {
                         Log.d("title" + j,appointments.get(j).title + "\n");
+                        Appointment app = appointments.get(j);
+                        TableRow row = new TableRow(context);
+                        TextView tv_title = new TextView(context);
+                        TextView tv_comment = new TextView(context);
+                        TextView tv_date = new TextView(context);
+                        tv_title.setText(app.title);
+                        tv_comment.setText(app.comment);
+                        tv_date.setText(app.date);
+                        tv_title.setPadding(1, 1, 1, 1);
+                        tv_comment.setPadding(1, 1, 1, 1);
+                        tv_date.setPadding(1, 1, 1, 1);
+                        tv_title.setGravity(Gravity.LEFT);
+                        tv_comment.setGravity(Gravity.CENTER);
+                        tv_date.setGravity(Gravity.RIGHT);
+                        row.addView(tv_title);
+                        row.addView(tv_comment);
+                        row.addView(tv_date);
+                        showAppointmentsTable.addView(row);
+
                     }
 
 
@@ -85,7 +113,53 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("error", "error");
             }
         });
-        requestQueue.add(stringRequest);
+        requestQueue.add(stringGETRequest);
+
+
+        // TODO Post appointment
+        /*
+        final Appointment postDeneme = new Appointment();
+        postDeneme.title = "andPostdeneme";
+        postDeneme.start_time = "2000-01-01T12:00:00.000Z";
+        postDeneme.end_time = "2000-01-01T13:00:00.000Z";
+        postDeneme.comment = "andpostcomment";
+        postDeneme.created_at = "2018-08-04T13:20:29.383Z";
+        postDeneme.updated_at = "2018-08-04T13:20:29.383Z";
+        postData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StringRequest stringPOSTRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("success", "success");
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("error", "error");
+                    }
+                }) {
+                @Override
+                protected Map<String,String> getParams(){
+                    Map<String,String> params = new HashMap<String, String>();
+                    params.put("title",postDeneme.title);
+                    params.put("start_time",postDeneme.start_time);
+                    params.put("end_time", postDeneme.end_time);
+                    params.put("created_at", postDeneme.created_at);
+                    params.put("updated_at", postDeneme.updated_at);
+                    params.put("comment",postDeneme.comment);
+                    params.put("id", "19");
+
+                    return params;
+                }
+
+                };
+                requestQueue.add(stringPOSTRequest);
+            }
+        });*/
+
+
 
 
 
