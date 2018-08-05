@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.CalendarView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -46,20 +45,20 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
 
         calendarView = findViewById(R.id.calendarView);
-        myDate = findViewById(R.id.myDate);
+        //myDate = findViewById(R.id.myDate);
         //postData = (Button) findViewById(R.id.data);
         showAppointmentsTable = findViewById(R.id.appointments);
 
         requestQueue = Volley.newRequestQueue(this);
         appointments = new ArrayList<Appointment>();
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        /*calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 String date = (i1 + 1) + "/" + i2 +"/" + i;
                 myDate.setText(date);
             }
-        });
+        });*/
         final String URL = "https://beck-calendar4.herokuapp.com/api/v1/appointments";
         StringRequest stringGETRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
@@ -74,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
                         appointment.comment = obj.getString("comment");
                         appointment.date = obj.getString("date");
                         appointment.start_time = obj.getString("start_time");
+                        appointment.start_time = appointment.start_time.substring(11, 16);
                         appointment.end_time = obj.getString("end_time");
+                        appointment.end_time = appointment.end_time.substring(11, 16);
                         appointment.created_at = obj.getString("created_at");
                         appointment.updated_at = obj.getString("updated_at");
                         appointments.add(appointment);
@@ -86,18 +87,28 @@ public class MainActivity extends AppCompatActivity {
                         TextView tv_title = new TextView(context);
                         TextView tv_comment = new TextView(context);
                         TextView tv_date = new TextView(context);
+                        TextView tv_start = new TextView(context);
+                        TextView tv_end = new TextView(context);
                         tv_title.setText(app.title);
                         tv_comment.setText(app.comment);
                         tv_date.setText(app.date);
+                        tv_start.setText(app.start_time);
+                        tv_end.setText(app.end_time);
                         tv_title.setPadding(1, 1, 1, 1);
                         tv_comment.setPadding(1, 1, 1, 1);
                         tv_date.setPadding(1, 1, 1, 1);
+                        tv_start.setPadding(1, 1, 1, 1);
+                        tv_end.setPadding(1, 1, 1, 1);
                         tv_title.setGravity(Gravity.LEFT);
                         tv_comment.setGravity(Gravity.CENTER);
-                        tv_date.setGravity(Gravity.RIGHT);
+                        tv_date.setGravity(Gravity.CENTER);
+                        tv_start.setGravity(Gravity.CENTER);
+                        tv_end.setGravity(Gravity.RIGHT);
                         row.addView(tv_title);
                         row.addView(tv_comment);
                         row.addView(tv_date);
+                        row.addView(tv_start);
+                        row.addView(tv_end);
                         showAppointmentsTable.addView(row);
 
                     }

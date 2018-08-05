@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
+    <!--<TextView
         android:id="@+id/myDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:textSize="23sp"
         android:layout_marginLeft="105dp"
         android:layout_marginTop="48dp"
-        />
+        />-->
     <LinearLayout
         android:layout_marginTop="48dp"
         android:background="@drawable/calen"
@@ -60,6 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:stretchColumns="1"
+        android:layout_margin="3dip"
         >
         <TableRow>
             <TextView
@@ -74,6 +75,16 @@
                 android:textColor="#339966"/>
             <TextView
                 android:text="Date"
+                android:gravity="center"
+                android:padding="3dip"
+                android:textColor="#339966"/>
+            <TextView
+                android:text="Start Time"
+                android:gravity="center"
+                android:padding="3dip"
+                android:textColor="#339966"/>
+            <TextView
+                android:text="End Time"
                 android:gravity="right"
                 android:padding="3dip"
                 android:textColor="#339966"/>
