@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
+        tools:context=".AddAppointment">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text= "Create Appointment"
+            android:textSize="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:background="@color/colorAccent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/title"
+                    android:text="Title"
+                    android:layout_marginBottom="40dp"/>
+            </android.support.design.widget.CoordinatorLayout>
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/comment"
+                    android:text="Comment"
+                    android:layout_marginBottom="20dp"/>
+            </android.support.design.widget.CoordinatorLayout>
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/date"
+                    android:text="Date"
+                    android:layout_marginBottom="20dp"/>
+            </android.support.design.widget.CoordinatorLayout>
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/start_time"
+                    android:text="Start Time"
+                    android:layout_marginBottom="20dp"/>
+            </android.support.design.widget.CoordinatorLayout>
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/end_time"
+                    android:text="End Time"
+                    android:layout_marginBottom="20dp"/>
+            </android.support.design.widget.CoordinatorLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CREATE"
+                android:id="@+id/create"
+                android:onClick="sendMessage"
+                android:textColor="@color/colorAccent"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="BACK"
+                android:id="@+id/back"
+                android:onClick="backMain"
+                android:textColor="@color/colorAccent"/>
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorAccent" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

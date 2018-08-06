@@ -10,6 +10,9 @@ import android.widget.CalendarView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Button;
+import android.view.View;
+import android.content.Intent;
 
 
 import com.android.volley.Request;
@@ -59,6 +62,16 @@ public class MainActivity extends AppCompatActivity {
                 myDate.setText(date);
             }
         });*/
+        Button bttn_name;
+        bttn_name = (Button)findViewById(R.id.data);
+        bttn_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent intent=new Intent(MainActivity.this,AddAppointment.class);
+                startActivity(intent);
+
+            }
+        });
         final String URL = "https://beck-calendar4.herokuapp.com/api/v1/appointments";
         StringRequest stringGETRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
@@ -170,12 +183,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-
-
-
-
-
-
+    }
+    public void send(View view){
+        Intent intent=new Intent(MainActivity.this,AddAppointment.class);
+        startActivity(intent);
     }
 
 
