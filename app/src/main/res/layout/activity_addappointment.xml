@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/title"
-                    android:text="Title"
+                    android:hint="Title"
                     android:layout_marginBottom="40dp"/>
             </android.support.design.widget.CoordinatorLayout>
             <android.support.design.widget.CoordinatorLayout
@@ -43,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/comment"
-                    android:text="Comment"
+                    android:hint="Comment"
                     android:layout_marginBottom="20dp"/>
             </android.support.design.widget.CoordinatorLayout>
             <android.support.design.widget.CoordinatorLayout
@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/date"
-                    android:text="Date"
+                    android:hint="Date"
                     android:layout_marginBottom="20dp"/>
             </android.support.design.widget.CoordinatorLayout>
             <android.support.design.widget.CoordinatorLayout
@@ -63,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/start_time"
-                    android:text="Start Time"
+                    android:hint="Start Time"
                     android:layout_marginBottom="20dp"/>
             </android.support.design.widget.CoordinatorLayout>
             <android.support.design.widget.CoordinatorLayout
@@ -73,7 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/end_time"
-                    android:text="End Time"
+                    android:hint="End Time"
                     android:layout_marginBottom="20dp"/>
             </android.support.design.widget.CoordinatorLayout>
             <Button
