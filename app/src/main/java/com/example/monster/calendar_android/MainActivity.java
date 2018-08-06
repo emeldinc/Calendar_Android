@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.CalendarView;
+import android.widget.SearchView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -37,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     Appointment appointment;
     List<Appointment> appointments;
+    List<Appointment> searchs;
     TableLayout showAppointmentsTable;
+    TableLayout showSearchTable;
     Context context;
 
     @Override
@@ -47,14 +50,18 @@ public class MainActivity extends AppCompatActivity {
 
         context = getApplicationContext();
 
+        SearchView simpleSearchView = (SearchView) findViewById(R.id.simpleSearchView); // inititate a search view
+        CharSequence query = simpleSearchView.getQuery(); // get the query string currently in the text field
+
+
         calendarView = findViewById(R.id.calendarView);
         //myDate = findViewById(R.id.myDate);
         //postData = (Button) findViewById(R.id.data);
         showAppointmentsTable = findViewById(R.id.appointments);
-
+        showSearchTable = findViewById(R.id.searchs);
         requestQueue = Volley.newRequestQueue(this);
         appointments = new ArrayList<Appointment>();
-
+        searchs = new ArrayList<Appointment>();
         /*calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
@@ -138,6 +145,58 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         requestQueue.add(stringGETRequest);
+
+        // perform set on query text listener event
+        simpleSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                for(int j = 0; j < appointments.size(); j++) {
+                    if(query.equalsIgnoreCase(appointments.get(j).title)) {
+                            searchs.add(appointments.get(j));
+                    }
+                }
+                for(int j = 0; j < searchs.size(); j++) {
+                    Log.d("title" + j,searchs.get(j).title + "\n");
+                    Appointment app = searchs.get(j);
+                    TableRow row = new TableRow(context);
+                    TextView tv_title = new TextView(context);
+                    TextView tv_comment = new TextView(context);
+                    TextView tv_date = new TextView(context);
+                    TextView tv_start = new TextView(context);
+                    TextView tv_end = new TextView(context);
+                    tv_title.setText(app.title);
+                    tv_comment.setText(app.comment);
+                    tv_date.setText(app.date);
+                    tv_start.setText(app.start_time);
+                    tv_end.setText(app.end_time);
+                    tv_title.setPadding(1, 1, 1, 1);
+                    tv_comment.setPadding(1, 1, 1, 1);
+                    tv_date.setPadding(1, 1, 1, 1);
+                    tv_start.setPadding(1, 1, 1, 1);
+                    tv_end.setPadding(1, 1, 1, 1);
+                    tv_title.setGravity(Gravity.LEFT);
+                    tv_comment.setGravity(Gravity.CENTER);
+                    tv_date.setGravity(Gravity.CENTER);
+                    tv_start.setGravity(Gravity.CENTER);
+                    tv_end.setGravity(Gravity.RIGHT);
+                    row.addView(tv_title);
+                    row.addView(tv_comment);
+                    row.addView(tv_date);
+                    row.addView(tv_start);
+                    row.addView(tv_end);
+                    showSearchTable.addView(row);
+
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // do something when text changes
+                return false;
+            }
+        });
+
 
 
         // TODO Post appointment

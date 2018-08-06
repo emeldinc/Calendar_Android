@@ -26,6 +26,11 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content">
 
+        <SearchView
+            android:id="@+id/simpleSearchView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
@@ -91,8 +96,54 @@
                 android:padding="3dip"
                 android:textColor="#339966"/>
         </TableRow>
+
     </TableLayout>
     </ScrollView>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none"
+        android:layout_weight="1">
+        <TableLayout
+            android:id="@+id/searchs"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1"
+            android:layout_margin="3dip"
+            >
+            <TableRow>
+                <TextView
+                    android:text="Title"
+                    android:gravity="left"
+                    android:padding="3dip"
+                    android:textColor="#339966"/>
+                <TextView
+                    android:text="Comment"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:textColor="#339966"/>
+                <TextView
+                    android:text="Date"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:textColor="#339966"/>
+                <TextView
+                    android:text="Start Time"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:textColor="#339966"/>
+                <TextView
+                    android:text="End Time"
+                    android:gravity="right"
+                    android:padding="3dip"
+                    android:textColor="#339966"/>
+            </TableRow>
+
+        </TableLayout>
+    </ScrollView>
+
 
 
 
